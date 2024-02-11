@@ -1,0 +1,63 @@
+<!-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%> -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VayuMandal</title>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+<style>
+    #midLeftContainer
+    {
+        height: 100%;
+        width:55%;
+        border: 1px solid rgba(13, 28, 192, 0.55);
+        box-shadow: 0px 0px 5px 2px rgba(13, 214, 83, 0.438);
+    }
+    #midRightContainer
+    {
+        margin-left: 2%;
+        height: 100%;
+        width:45%;
+        /* background-color: aqua; */
+
+    }
+    #title
+    {
+        margin-top: 0%;
+        font-size: 1vw;
+        text-align: center;
+        color: rgb(13, 205, 239);
+    }
+    #map
+    {
+        border: 1px solid rgba(13, 28, 192, 0.55);
+        box-shadow: 0px 0px 5px 2px rgba(207, 214, 13, 0.603);
+        display: block;
+        margin: 0 auto;
+    }
+</style>
+<body>
+    <div id="headerContainer">
+        <img id="logo" src="img\app logo2.png" alt="Logo">
+            <img id="locLogo" src="img\loc.png" alt="locLogo" >
+            <input type="text" id="searchBox" placeholder="Search Location...">
+            <input id ="searchButton" type="image" src="img\search.png" alt="Submit">
+        
+    </div>
+    <div id="midContainer">
+        <div id="midLeftContainer"></div>
+        <div id="midRightContainer">
+            <p id="title">Location on Google Map</p>
+            <iframe id="map" width="600" height="400" 
+            src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBJ7jy05eY3WoN9VfKkBWWS6qpkkZPENnQ&center=20.183263125048448,76.51591305791796&zoom=15&maptype=satellite" allowfullscreen>
+    </iframe>
+        </div>
+
+    </div>
+
+    <div id="footerContainer">
+        Copyright &#169; [2024] VayuMandal. All Rights Reserved.
+    </div>
+</body>
+</html>
