@@ -1,56 +1,54 @@
 package com.vayumandal.servlets;
 
-import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.net.*;
+import java.io.IOException;
 
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.vayumandal.services.UserLocationDetector;
+
+@SuppressWarnings("serial")
+@WebServlet("/LocationServlet")
 public class LocationServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        String ipInfoURL = "http://ipinfo.io";
-        String city = null;
-        String latitude = null;
-        String longitude = null;
-        String msg = null;
-
-        try {
-            URL url = new URL(ipInfoURL);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-            StringBuilder result = new StringBuilder();
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                result.append(line);
-            }
-
-            String jsonResult = result.toString();
-
-            // Extracting city, latitude, and longitude from the JSON response
-            int cityIndex = jsonResult.indexOf("\"city\":") + 7;
-            int cityEndIndex = jsonResult.indexOf(",", cityIndex);
-            city = jsonResult.substring(cityIndex, cityEndIndex).replace("\"", "").trim();
-
-            int locIndex = jsonResult.indexOf("\"loc\":") + 7;
-            int locEndIndex = jsonResult.indexOf("}", locIndex);
-            String loc = jsonResult.substring(locIndex, locEndIndex).replace("\"", "").trim();
-            latitude = loc.split(",")[0];
-            longitude = loc.split(",")[1];
-
-            msg = "Success";
-        } catch (Exception e) {
-            msg = "Fail to Detect Your Current Location. Try to Enter User Location Manually or Check Your Internet Connection.";
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+    	System.out.println("LocationServlet Called"); // to track flow of app on terminal
+    	
+    	// Declare Weather Properties 
+    	String lat =null;
+        String lon =null;
+        String msg=null;
+        
+        UserLocationDetector userLocationDetector=new UserLocationDetector();
+        lat=userLocationDetector.getLat();
+        lon=userLocationDetector.getLon();
+        msg=userLocationDetector.getMsg();
+        
+        if(msg==null)
+        {
+            // Set weather property in request
+            request.setAttribute("lat", lat);
+            request.setAttribute("lon", lon);
+            System.out.println("lat and long Setted "); // to track flow of app
         }
-
-        // Set attributes to pass to JSP
-        request.setAttribute("city", city);
-        request.setAttribute("latitude", latitude);
-        request.setAttribute("longitude", longitude);
-        request.setAttribute("msg", msg);
-
-        // Forward the request to the JSP file
-        RequestDispatcher dispatcher = request.getRequestDispatcher("2. user cordinate printing ok.jsp");
-        dispatcher.forward(request, response);
+        else
+        {
+        	request.setAttribute("msg", msg);
+        	System.out.println("Exception occure While Detecting User Cordinates");
+        }
+    
+        
+        try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        // Forward to index.jsp
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 }
