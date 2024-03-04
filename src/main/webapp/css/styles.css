@@ -60,13 +60,20 @@ html {
     left: 5%;
 }
 
-#searchButton {
-    position: relative;
-    left: -9%;
-    top: 33%;
-    height: 30%;
+#placeForm{
+	position: relative;
+	left:-9%;
+	top:33%;
+	height: 30%;
     width: 2.7%;
 }
+#searchButton
+{
+	height: 100%;
+	width: 100%;
+}
+
+
 
 
 #midContainer {
@@ -164,7 +171,7 @@ html {
     font-size: 1.5vw;
     display: inline;
     position: relative;
-    top: -16%;
+    top: -19%;
     left: 27%;
 
 }
@@ -175,7 +182,7 @@ html {
     display: inline;
     position: relative;
     top: -10%;
-    left: 9%;
+    left: 20.5%;
 }
 
 table {
@@ -188,7 +195,7 @@ table {
 
 th,
 td {
-    border: 1px solid rgb(184, 43, 43);
+   /*  border: 1px solid rgb(184, 43, 43); */
     padding: 8px;
 }
 
@@ -198,22 +205,4 @@ td {
 
 .values {
     font-size: 1.5vw;
-}
-#min
-{
-    font-size: 1.5vw;
-    color: white;
-    display: inline;
-    position: relative;
-    top:-30%;
-    left: 40%;
-}
-#max
-{
-    font-size: 1.5vw;
-    color: white;
-    display: inline;
-    position: relative; 
-    top:-22%;
-    left: 28%;
 }
